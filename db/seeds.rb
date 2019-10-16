@@ -1,0 +1,1 @@
+Product.create!(title: 'Sample data', description: %{this is the description for sample data}, image_url: 'rails.png', price:26.00)
