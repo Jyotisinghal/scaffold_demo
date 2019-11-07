@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:new, :create]
     resources :line_items, :carts
     root 'store#index', as: 'store_index', via: :all
+    get 'store/set_locale', to: 'store#set_locale'
   end 
   
   # get 'order/index', as: 'orders'

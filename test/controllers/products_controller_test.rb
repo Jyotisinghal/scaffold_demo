@@ -18,10 +18,10 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create product" do
     assert_difference('Product.count', 1) do
-      post products_url, params: { product: { description: @product.description, image_url: @product.image_url, price: @product.price, title: @title } }
+      post products_url, params: { product: {title: "abchgddgehgeh", description: "5ccsvcv", image_url: "rails.png", price: 23}, commit: "Create Product"}
     end
 
-    assert_redirected_to store_index_url(Product.last)
+    assert_redirected_to store_index_url
   end
 
   test "should show product" do

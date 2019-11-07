@@ -3,6 +3,7 @@ require 'test_helper'
 class OrdersControllerTest < ActionDispatch::IntegrationTest
   def setup 
     @order = orders(:one)
+    @product = products(:ruby)
   end
 
   test "require item in cart" do
@@ -12,7 +13,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
-  	post line_items_url, params: { product_id: products(:ruby).id }
+  	post line_items_url, params: { product_id: @product.id }
     get new_order_url
     assert_response :success
   end

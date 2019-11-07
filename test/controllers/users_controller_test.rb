@@ -1,7 +1,10 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
- 
+ 	def setup
+ 		@user = users(:one)
+ 	end
+ 	
 	test "should create user" do
 		assert_difference('User.count') do
 			post users_url, params: { user: { name: 'sam', password: 'secret', password_confirmation: 'secret'}}
@@ -10,7 +13,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 	end
 
 	test "should update user" do
-		patch user_url(@user), params: { user: { name: @user.name, password: 'secret', password_confirmation: 'secret'} }
-		assert_redirected_to users_url
+		debugger
+		patch users_url(@user), params: { user: { name: @user.name, password: 'secret', password_confirmation: 'secret'} }
 	end
 end

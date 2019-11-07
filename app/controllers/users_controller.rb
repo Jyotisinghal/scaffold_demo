@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 	end
 
 	def edit
+		@user = User.find(params[:id])
 	end
 
 	def create
@@ -26,6 +27,7 @@ class UsersController < ApplicationController
 
 	def update
 		respond_to do |format|
+		@user = User.find(params[:id])
 			if @user.update(user_params)
 				format.html { redirect_to users_url,
 					notice: "User #{@user.name} was successfully updaated."}
@@ -36,9 +38,10 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
+		@user = User.find(params[:id])
 		@user.destroy
 		respond_to do |format|
-			format.html { redirect_to users_path, notice: "User #{@user.name} deleted"}
+			format.html { redirect_to users_path, notice: "User deleted"}
 		end
 	end
 

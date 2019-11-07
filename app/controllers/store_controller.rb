@@ -9,9 +9,8 @@ class StoreController < ApplicationController
     if params[:set_locale]
       redirect_to store_index_path(locale: params[:set_locale])
     else
-  	 @products = Product.order(:title)
-  	end
-    # @session_num = session[:counter]
+      @products = Product.order(:title)
+    end
   end
 
   private
