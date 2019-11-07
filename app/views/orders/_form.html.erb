@@ -1,0 +1,37 @@
+<%= form_with(model: @order, local: true) do |form| %>
+	<%= render 'shared/errors', object: @order %>
+
+
+<div class="field">
+	<%= form.label :name, t('.name') %>
+	<%= form.text_field :name, id: :order_name, size: 40 %>
+</div>
+
+<div class="field">
+	<%= form.label :address, t('.address_html') %>
+	<%= form.text_area :address, id: :order_address, rows: 3, cols: 40 %>
+</div>
+
+<div class="field">
+	<%= form.label :email, t('.email') %>
+	<%= form.email_field :email, id: :order_email, size: 40 %>
+</div>
+
+<%
+=begin %>
+
+<div class="field">
+	<%= form.label :pay_type %>
+	<%= form.select :pay_type, Order.pay_types.keys, id: :order_pay_type, prompt: 'select a payment method' %>
+</div>
+
+<%
+=end %>
+
+<div id="pay-type-component"></div>
+
+<div class="actions">
+	<%= form.submit t('.submit') %>
+</div>
+
+<% end %>

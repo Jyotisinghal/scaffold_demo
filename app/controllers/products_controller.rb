@@ -9,8 +9,8 @@ class ProductsController < ApplicationController
 
   # GET /products/1
   # GET /products/1.json
-  def show
-  end
+  # def show
+  # end
 
   # GET /products/new
   def new
@@ -21,6 +21,8 @@ class ProductsController < ApplicationController
   def edit
   end
 
+  def show 
+  end
   # POST /products
   # POST /products.json
   def create
@@ -28,12 +30,10 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render :show, status: :created, location: @product }
+        format.html { redirect_to store_index_url, notice: 'Product was successfully created.' }
       else
         puts @product.errors.full_messages
         format.html { render :new }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,11 +43,12 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
-        format.json { render :show, status: :ok, location: @product }
+        format.html { redirect_to store_index_url, notice: 'Product was successfully updated.' }
+        
+        @products = Product.all
+        ActionCable.server.broadcast 'products', html: render_to_string('store/index', layout: false)
       else
         format.html { render :edit }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -57,8 +58,17 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to store_index_url, notice: 'Product was successfully destroyed.' }
+    end
+  end
+
+  def who_bought
+    @product = Product.find(params[:id])
+    @latest_order = @product.orders.order(:updated_at).last
+    if stale?(@latest_order)
+      respond_to do |format|
+        format.atom
+      end
     end
   end
 

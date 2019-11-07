@@ -1,0 +1,20 @@
+<article>
+	<h2><%= t('.title') %></h2>
+	<table>
+		<%= render(cart.line_items) %>
+		<tfoot>
+			<tr>
+				<th colspan="2">Total:</th>
+				<td class="price"><%= number_to_currency(cart.total_price) %></td>
+			</tr>
+		</tfoot>
+	</table>
+	<div class="actions" style="text-align: right">
+		<div style="float: left">
+			<%= button_to t('.empty'), cart, method: :delete, data: {confirm: 'Are you sure'} %>
+		</div>
+		<div>
+			<%= button_to t('.checkout'), new_order_path(locale: I18n.locale), method: :get, class: "checkout" %>
+		</div>
+	</div>
+</article>

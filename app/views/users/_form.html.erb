@@ -1,0 +1,27 @@
+<div class="depot_form">
+	<%= form_with(model: user, local: true) do |form| %>
+  	<%= render 'shared/errors', object: @user %>
+
+  	<h2>Enter user details </h2>
+
+  	<div class="field" %>
+  		<%= form.label :name, 'Name :' %>
+  		<%= form.text_field :name, id: :user_name, size: 40, class: "form-control" %>
+  	</div>
+
+  	<div class="field">
+  		<%= form.label :password, 'Password: ' %>
+  		<%= form.password_field :password, id: :user_password, size: 40, class: "form-control" %>  		
+  	</div>
+
+  	<div class="field">
+  		<%= form.label :password_confirmation, 'Confirm: ' %>
+  		<%= form.password_field :password_confirmation, id: :user_password_confirmation, size: 40, class: "form-control" %>
+  	</div>
+
+  	<div class="actions">
+  		<%= form.submit %>
+  	</div>
+
+	<% end %>	
+</div>

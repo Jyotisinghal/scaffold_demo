@@ -32,7 +32,10 @@ class ProductTest < ActiveSupport::TestCase
   end
 
   test "title length should be minimum 10" do
-
+    product = Product.new(title:    "My Book",
+                          description: "yyy",
+                          image_url:   "zzz.jpg")
+    product.valid?
   end
 
   def new_product(image_url)
