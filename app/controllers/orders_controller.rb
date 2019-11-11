@@ -4,6 +4,11 @@ class OrdersController < ApplicationController
 	before_action :set_cart, only: [:new, :create]
 	before_action :ensure_cart_is_not_empty, only: [:new]
   
+
+  def index
+    @orders = Order.order(:name)
+  end
+
   def new
   	@order = Order.new
   end
@@ -22,6 +27,12 @@ class OrdersController < ApplicationController
   			format.html { render :new }
   		end
   	end
+  end
+
+  def destroy
+    @order = Order.find[:id]
+    @order.destroy
+    redirect_to store_index_path, notice: "you deleted order"
   end
 
 

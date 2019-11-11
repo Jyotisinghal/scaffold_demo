@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   scope '(:locale)' do
-    resources :orders, only: [:new, :create]
+    resources :orders, only: [:new, :create, :index]
     resources :line_items, :carts
     root 'store#index', as: 'store_index', via: :all
     get 'store/set_locale', to: 'store#set_locale'
